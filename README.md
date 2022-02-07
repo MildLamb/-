@@ -30,3 +30,9 @@
 (3) 修饰基本类型数据和引用类型数据
 - 如果是基本数据类型的变量，则其数值一旦在初始化之后便不能更改
 - 如果是引用类型的变量，则在对其初始化之后便不能再让其指向另一个对象。但是**引用的值是可变的**。
+
+## 为什么局部内部类和匿名内部类只能访问局部final变量?
+- 下面代码编译后会生成两个class文件，Test.class和Test1.class
+![image](https://user-images.githubusercontent.com/92672384/152712905-3b02af97-82c2-4384-a5b8-cf0384f33175.png)
+
+![image](https://user-images.githubusercontent.com/92672384/152712940-47509fe0-433f-47ed-85f6-7c22d32bc4ec.png)

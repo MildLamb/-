@@ -31,8 +31,41 @@
 - 如果是基本数据类型的变量，则其数值一旦在初始化之后便不能更改
 - 如果是引用类型的变量，则在对其初始化之后便不能再让其指向另一个对象。但是**引用的值是可变的**。
 
-## 为什么局部内部类和匿名内部类只能访问局部final变量?
+## 为什么局部内部类和匿名内部类只能访问局部final变量(JDK8默认会加上final，所以不会报错)?
 - 下面代码编译后会生成两个class文件，Test.class和Test1.class
-![image](https://user-images.githubusercontent.com/92672384/152712905-3b02af97-82c2-4384-a5b8-cf0384f33175.png)
+```java
+public class Test {
+    public static void main(String[] args) {
+        new OutClass().outPrint(23);
+    }
 
-![image](https://user-images.githubusercontent.com/92672384/152712940-47509fe0-433f-47ed-85f6-7c22d32bc4ec.png)
+    // 局部final变量 a,b
+    public void test(int b){
+        int a = 10;
+        new Thread(){
+            @Override
+            public void run() {
+                System.out.println(a);
+                System.out.println(b);
+            }
+        }.start();
+    }
+
+}
+
+
+class OutClass {
+    private int age = 12;
+    public void outPrint(int x) {
+        class InClass {
+            public void InPrint() {
+                System.out.println(x);
+                System.out.println(age+1);
+            }
+        }
+        new InClass().InPrint();
+    }
+}
+```
+- 首先需要知道的一点是:内部类和外部类是处于同一个级别的，内部类不会因为定义在方法中就会随着方法的执行完毕就被销毁。
+- 这里就会产生问题:当外部类的方法结束时，局部变量就会被销毁了，但是内部类对象可能还存在(只有没有人再引用它时，才会死亡)。这里就出现了一个矛盾:内部类对象访问了一个不存在的变量。为了解决这个问题，就将局部变量复制了一份作为内部类的成员变量，这样当局部变量死亡后，内部类仍可以访问它，实际访问的是局部变量的"copy"。这样就好像延长了局部变量的生命周期

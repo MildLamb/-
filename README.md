@@ -92,3 +92,13 @@ class OutClass {
 ## List和Set的区别?
 - List:有序，按对象进入的顺序保存对象，可重复，允许多个Null元素对象，可以使用lterator取出所有元素，在逐一遍历，还可以使用get(int index)获取指定下表的元素
 - Set:无序，不可重复，最多允许有一个Null元素对象，取元素时只能用lterator接口取得所有元素，在逐一遍历各个元素
+
+## hashCode和equals
+### hashCode介绍
+hashCode()的作用是获取哈希码，也称为散列码;它实际上是返回一个int整数。这个哈希码的作用是确定该对象在哈希表中的索引位置。hashCode()定义在JDK的Object.java中，Java中的任何类都包含有hashCode()函数。散列表存储的是键值对(key-value)，它的特点是:能根据"键"快速的检索出对应的“值"。这其中就利用到了散列码!(可以快速找到所需要的对象)
+
+- 如果两个对象相等，则hashcode—定也是相同的
+- 两个对象相等,对两个对象分别调用equals方法都返回true
+- 两个对象有相同的hashcode值，它们也不一定是相等的因此
+- equals方法被覆盖过，则hashCode方法也必须被覆盖
+- hashCode()的默认行为是对堆上的对象产生独特值。如果没有重写hashCode()，则该class的两个对象无论如何都不会相等（即使这两个对象指向相同的数据)

@@ -118,3 +118,15 @@ jdk8开始链表高度到8、数组长度超过64，链表转变为红黑树，�
 - key为null，存在下标0的位置
 
 容量默认是16，加载因子默认是0.75，阈值=容量*加载因子，默认是12，当元素数量超过阈值时便会触发扩容，扩容为原来的2倍
+
+## ConcurrentHashMap原理，jdk7和jdk8的区别
+jdk7：  
+- 数据结构: ReentrantLock+Segment+HashEntry，一个Segment中包含一个HashEntry数组，每个HashEntry又是一个链表结构Ⅰ  
+- 元素查询: 二次hash，第一次Hash定位到Segment，第二次Hash定位到元素所在的链表的头部   
+- 锁:Segment分段锁Segment继承了ReentrantLock，锁定操作的Segment，其他的Segment不受影响，并发度为segment个数，可以通过构造函数指定，数组扩容不会影响其他的segment  
+- get方法无需加锁,volatile保证
+
+jdk8：  
+- 数据结构: synchronized+CAS+Node+红黑树，Node的val和next都用volatile修饰，保证可见性查找，替换，赋值操作都使用CAS
+- 锁:锁链表的head节点，不影响具他兀系的读与，认性，扩容
+- 读操作无锁:Node的val和next使用volatile修饰，读写线程对该变量互相可见数组用volatile修饰，保证扩容时被读线程感知

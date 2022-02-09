@@ -168,3 +168,22 @@ Java语言通过字节码的方式，在一定程度上解决了传统解释型�
 - Error是程序无法处理的错误，一旦出现这个错误，则程序将被迫停止运行。
 - Exception不会导致程序停止，又分为两个部分RunTimeException运行时异常和CheckedException检查异常。
 - RunTimeException常常发生在程序运行过程中，会导致程序当前线程执行失败。CheckedException常常发生在程序编译过程中，会导致程序编译不通过。
+
+1、常见编译时异常：  
+
+IOException                    输入输出流异常 
+FileNotFoundException          文件找不到的异常  
+ClassNotFoundException         类找不到异常  
+DataFormatException            数据格式化异常  
+NoSuchFieldException           没有匹配的属性异常  
+NoSuchMethodException          没有匹配的方法异常  
+SQLException                   数据库操作异常  
+TimeoutException               执行超时异常  
+
+2、运行时异常（RuntimeException）：  
+
+ArrayIndexOutofBoundsException     数组越界异常 
+ClassCastException                 类型转换异常 
+NullPointerException               空指针异常   
+IllegalAccessException             非法的参数异常 
+InputMismatchException             输入不匹配异常

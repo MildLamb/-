@@ -157,3 +157,14 @@ Java语言通过字节码的方式，在一定程度上解决了传统解释型�
 
 ## 双亲委派机制
 ![image](https://user-images.githubusercontent.com/92672384/153102744-c4c0ae09-7fb2-4405-b0ee-3fff2a579c91.png)
+
+双亲委派的好处：  
+- 主要是为了安全性，避免用户自己编写的类动态替换Java的一些核心类，比如String。
+- 同时也避免了类的重复加载，因为JⅣM中区分不同类，不仅仅是根据类名，相同的class文件被不同的ClassLoader加载就是不同的两个类
+
+## Java的异常体系
+- Java中的所有异常都来自顶级父类Throwable。
+- Throwable下有两个子类Exception和Error。
+- Error是程序无法处理的错误，一旦出现这个错误，则程序将被迫停止运行。
+- Exception不会导致程序停止，又分为两个部分RunTimeException运行时异常和CheckedException检查异常。
+- RunTimeException常常发生在程序运行过程中，会导致程序当前线程执行失败。CheckedException常常发生在程序编译过程中，会导致程序编译不通过。

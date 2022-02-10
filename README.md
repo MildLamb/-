@@ -297,4 +297,5 @@ ThreadLocal内存泄漏的根源是:由于ThreadLocalMap的生命周期跟Thread
   - ThreadPoolExecutor.CallerRunsPolicy：由调用线程（提交任务的线程）处理该任务
 
 ## 简述线程池执行流程
-![image](https://user-images.githubusercontent.com/92672384/153328721-ceea32c0-e5bb-4690-a491-38384b674cff.png)
+
+![线程池执行流程](https://user-images.githubusercontent.com/92672384/153329503-fcee183d-99f8-4ec0-b969-c4dad43d1143.png)

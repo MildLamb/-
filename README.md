@@ -252,4 +252,10 @@ GC Root：
 - get方法执行过程类似。ThreadLocal首先会获取当前线程对象，然后获取当前线程的ThreadLocalMap对象。再以当前ThreadLocal对象为key，获取对应的value。
 - 由于每一条线程均含有各自私有的ThreadLocalMap容器，这些容器相互独立互不影响，因此不会存在线程安全性问题，从而也无需使用同步机制来保证多条线程访问容器的互斥性。 
 
-![image](https://user-images.githubusercontent.com/92672384/153321258-c3cb3714-bcc6-40e7-a375-61ee739d3b42.png)
+![image](https://user-images.githubusercontent.com/92672384/153321258-c3cb3714-bcc6-40e7-a375-61ee739d3b42.png)  
+
+使用场景：  
+1. 在进行对象跨层传递的时候，使用ThreadLocal可以避免多次传递，打破层次间的约束。
+2. 线程间数据隔离
+3. 进行事务操作，用于存储线程事务信息。
+4. 数据库连接，Session会话管理。

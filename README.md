@@ -380,16 +380,21 @@ Spring中的BeanFactory就是简单工厂模式的体现，根据传入一个唯
 ```
 - 工厂方法
 ```text
-实现了FactoryBean接口的bean是一类叫做factory的bean。其特点是，spring会在使用getBean()调用获得bean时，会自动调用该bean的getobject()方法，所以返回的不是factory这个bean，而是这个bean.getojbect()方法的返回值。
+实现了FactoryBean接口的bean是一类叫做factory的bean。其特点是，spring会在使用getBean()调用获得bean时，
+会自动调用该bean的getobject()方法，所以返回的不是factory这个bean，而是这个bean.getojbect()方法的返回值。
+```
 - 单例模式:保证一个类仅有一个实例，并提供一个访问它的全局访问点
 ```text
-spring对单例的实现: spring中的单例模式完成了后半句话，即提供了全局的访问点BeanFactory。但没有从构造器级别去控制单例，这是因为spring管理的是任意的java对象。
+spring对单例的实现: spring中的单例模式完成了后半句话，即提供了全局的访问点BeanFactory。
+但没有从构造器级别去控制单例，这是因为spring管理的是任意的java对象。
 ```
 - 适配器模式
 ```text
-spring定义了一个适配接口，使得每一种Contro11er有一种对应的适配器实现类，让适配器代替controller执行相应的方法。这样在扩展Contro11er时，只需要增加一个适配器类就完成了SpringMVC的扩展了。
+spring定义了一个适配接口，使得每一种Contro11er有一种对应的适配器实现类，让适配器代替controller执行相应的方法。
+这样在扩展Contro11er时，只需要增加一个适配器类就完成了SpringMVC的扩展了。
 ```
 - 动态代理
 ```text
-切面在应用运行的时刻被织入。一般情况下，在织入切面时，AOP容器会为目标对象创建动态的创建一个代理对象。springAOP就是以这种方式织入切面的。
+切面在应用运行的时刻被织入。一般情况下，在织入切面时，AOP容器会为目标对象创建动态的创建一个代理对象。
+springAOP就是以这种方式织入切面的。
 ```

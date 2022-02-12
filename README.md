@@ -365,3 +365,10 @@ ThreadLocal内存泄漏的根源是:由于ThreadLocalMap的生命周期跟Thread
 - session:与request范围类似，确保每个session中有一个bean的实例，在session过期后，bean会随之失效。
 - application: bean被定义为在ServletContext的生命周期中复用一个单例对象。
 - websocket: bean被定义为在websocket的生命周期中复用一个单例对象。
+
+## Spring中的单例Bean是线程安全的吗?
+- 不安全
+- Spring中的Bean默认是单例模式的，框架并没有对bean进行多线程的封装处理。
+- 如果Bean是有状态的那就需要开发人员自己来进行线程安全的保证，最简单的办法就是改变bean的作用域把"singleton"改为"protopyte'这样每次请求Bean就相当于是new Bean()这样就可以保证线程的安全了。
+  - 有状态就是有数据存储功能
+  - 无状态就是不会保存数据，controller、service和dao层本身并不是线程安全的，只是如果只是调用里面的方法，而且多线程调用一个实例的方法，会在内存中复制变量，这是自己的线程的工作内存，是安全的。

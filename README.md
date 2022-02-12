@@ -342,3 +342,6 @@ ThreadLocal内存泄漏的根源是:由于ThreadLocalMap的生命周期跟Thread
 - 相对于基本的BeanFactory，ApplicationContext 唯一的不足是占用内存空间。当应用程序配置Bean较多时，程序启动较慢。
 - BeanFactory和ApplicationContext都支持BeanPostProcessor、BeanFactoryPostProcessor的使用，但两者之间的区别是:BeanFactory需要手动注册，而ApplicationContext则是自动注册。
 - BeanFactory通常以编程的方式被创建，ApplicationContext还能以声明的方式创建，如使用ContextLoader。
+
+## SpringBean的生命周期
+![8960725A303273A73DDA54FC5798B048](https://user-images.githubusercontent.com/92672384/153692681-7bca0b70-44ec-406b-a6cd-625bca7cc1a2.jpg)

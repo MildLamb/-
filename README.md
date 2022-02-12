@@ -357,3 +357,11 @@ ThreadLocal内存泄漏的根源是:由于ThreadLocalMap的生命周期跟Thread
 9. 如果当前创建的bean是单例的则会把bean放入单例池
 10. 使用bean
 11. Spring容器关闭时调用DisposableBean中destory()方法
+
+## Spring中Bean的作用域?
+- singleton:默认，每个容器中只有一个bean的实例，单例的模式由BeanFactory自身来维护。该对象的生周期是与Spring lOC容器一致的（但在第一次被注入时才会创建)。
+- prototype:为每一个bean请求提供一个实例。在每次注入时都会创建一个新的对象
+- request: bean被定义为在每个HTTP请求中创建一个单例对象，也就是说在单个请求中都会复用这一个单例对象。
+- session:与request范围类似，确保每个session中有一个bean的实例，在session过期后，bean会随之失效。
+- application: bean被定义为在ServletContext的生命周期中复用一个单例对象。
+- websocket: bean被定义为在websocket的生命周期中复用一个单例对象。

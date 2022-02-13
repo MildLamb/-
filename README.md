@@ -443,3 +443,8 @@ spring事务的原理是AOP，进行了切面增强，那么失效的根本原�
 - byType-根据bean的类型进行自动装配。
 - constructor-类似byType，不过是应用于构造器的参数。如果一个bean与构造器参数的类型形同，则进行自动装配，否则导致异常。
 - autodetect-如果有默认的构造器，则通过constructor方式进行自动装配，否则使用byType方式进行自动装配。
+
+## Spring，SpringMVC和SpringBoot的区别?
+- spring是一个IOC容器，用来管理Bean，使用依赖注入实现控制反转，可以很方便的整合各种框架，提供AOP机制弥补oOP的代码重复问题、更方便将不同类不同方法中的共同处理抽取成切面、自动注入给方法执行，比如日志、异常等
+- springmvc是spring对web框架的一个解决方案，提供了一个总的前端控制器Servlet，用来接收请求，然后定义了一套路由策略(url到handle的映射）及适配执行handle，将handle结果使用视图解析技术生成视图展现给前端
+- springboot是spring提供的一个快速开发工具包，让程序员能更方便、更快速的开发spring+springmvc应用，简化了配置(约定了默认配置)，整合了一系列的解决方案(starter机制) 、redis、mongodb、es，可以开箱即用

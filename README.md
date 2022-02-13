@@ -428,3 +428,18 @@ springAOP就是以这种方式织入切面的。
 - NOT_SUPPORTED:以非事务方式执行,如果当前存在事务，则挂起当前事务
 - NEVER:不使用事务，如果当前事务存在，则抛出异常
 - NESTED:如果当前事务存在，则在嵌套事务中执行，否则REQUIRED的操作一样(开启一个事务)
+
+## Spring事务什么时候会失效?
+spring事务的原理是AOP，进行了切面增强，那么失效的根本原因是这个AOP不起作用了!常见情况有如下几种:  
+1. 发生自调用，类里面使用this调用本类的方法(this通常省略)，此时这个this对象不是代理类，而是UserService对象本身!
+2. 方法不是public的，@Transactiona1 只能用于 public 的方法上，否则事务不会失效，如果要用在非 public 方法上，可以开启Aspect]代理模式。
+3. 数据库不支持事务
+4. 对象没有被Spring管理
+5. 异常被捕获，事务不会回滚(或者抛出的异常没有被定义，默认为RuntimeException)
+
+## 什么是bean的自动装配?有哪些方式?
+- no-缺省情况下，自动配置是通过“ref"属性手动设定。
+- byName-根据bean的属性名称进行自动装配。
+- byType-根据bean的类型进行自动装配。
+- constructor-类似byType，不过是应用于构造器的参数。如果一个bean与构造器参数的类型形同，则进行自动装配，否则导致异常。
+- autodetect-如果有默认的构造器，则通过constructor方式进行自动装配，否则使用byType方式进行自动装配。

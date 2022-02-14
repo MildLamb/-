@@ -467,4 +467,25 @@ spring事务的原理是AOP，进行了切面增强，那么失效的根本原�
 
 ![image](https://user-images.githubusercontent.com/92672384/153787785-5a5255ff-ff00-47b7-ae3c-61987258383a.png)
 
+## SpringMVC的九大组件?
+1. HandlerMapping  
+initHandlerMappings(context)，处理器映射器，根据用户请求的资源uri来查找Handler的。在SpringMVC中会有很多请求，每个请求都需要一个Handler处理，具体接收到一个请求之后使用哪个Handler进行，这就是HandlerMapping需要做的事。  
+2. HandlerAdapter  
+initHandlerAdapters(context)，适配器。因为SpringMVC中的Handler可以是任意的形式，只要能处理请求就ok，但是Servlet需要的处理方法的结构却是固定的，都是以request和response为参数的方法。如何让固定的Servlet处理方法调用灵活的Handler来进行处理呢?这就是HandlerAdapter要做的事情。Handler是用来干活的工具;HandlerMapping用于根据需要干的活找到相应的工具;HandlerAdapter是使用工具干活的人。  
+3. HandlerExceptionResolver  
+initHandlerExceptionResolvers(context)，其它组件都是用来干活的。在干活的过程中难免会出现问题,出问题后怎么办呢?这就需要有一个专门的角色对异常情况进行处理，在SpringMVC中就是HandlerExceptionResolver。具体来说，此组件的作用是根据异常设置ModelAndView，之后再交给render方法进行渲染。  
+4. ViewResolver  
+initViewResolvers(context),ViewResolver用来将String类型的视图名和Locale解析为Vview类型的视图。  
+5. RequestToViewNameTranslator  
+initRequestToViewNameTranslator(context),ViewResolver是根据ViewName查找View，但有的Handler处理完后并没有设置View也没有设置ViewName，这时就需要从request获取ViewName了，如何从request中获取ViewName就是RequestToViewNameTranslator要做的事情了。RequestToViewNameTranslator在Spring MVC容器里只可以配置一个，所以所有request到ViewName的转换规则都要在一个Translator里面全部实现。  
+6. LocaleResolver  
+initLocaleResolver(context)，解析视图需要两个参数:一是视图名，另一个是Locale。视图名是处理器返回的,Locale是从哪里来的?这就是LocaleResolver要做的事情。LocaleResolver用于从request解析出Locale，Locale就是zh-cn之类，表示一个区域，有了这个就可以对不同区域的用户显示不同的结果。SpringMVC主要有两个地方用到了Locale:一是ViewResolver视图解析的时候;二是用到国际化资源或者主题的时候。  
+7. ThemeResolver
+initThemeResolver(context)，用于解析主题。SpringMVC中一个主题对应一个properties文件，里面存放着跟当前主题相关的所有资源、如图片、css样式等。SpringMVC的主题也支持国际化，同一个主题不同区域也可以显示不同的风格。SpringMVC中跟主题相关的类有ThemeResolver、ThemeSource和Theme。主题是通过一系列资源来具体体现的，要得到一个主题的资源，首先要得到资源的名称，这是ThemeResolver的工作。然后通过主题名称找到对应的主题（可以理解为一个配置）文件，这是ThemeSource的工作。  
+8. MultipartResolver  
+initMultipartResolver(context)，用于处理上传请求。  
+9. FlashMapManager  
+initFlashMapManager(context)，用来管理FlashMap的，FlashMap主要用在redirect中传递参数。  
 
+## SpringBoot自动配置原理
+![image](https://user-images.githubusercontent.com/92672384/153790658-1898f2cc-dd63-4fbf-8683-c405862792f3.png)

@@ -489,3 +489,10 @@ initFlashMapManager(context)，用来管理FlashMap的，FlashMap主要用在red
 
 ## SpringBoot自动配置原理
 ![image](https://user-images.githubusercontent.com/92672384/153790658-1898f2cc-dd63-4fbf-8683-c405862792f3.png)
+
+## 如何理解Springboot的starter
+- starter就是定义一个starter的jar包，写一个@Configuration配置类、将需要的bean定义在里面，然后在starter包的META-INF/spring.factories中写入该配置类,springboot会按照约定来加载该配置类 
+- 开发人员只需要将相应的starter包依赖进应用，进行相应的属性配置（使用默认配置时，不需要配置)，就可以直接进行代码开发，使用对应的功能了，比如mybatis-spring-boot--starter，spring-boot-starter-redis
+
+## 什么是嵌入式服务器?为什么使用嵌入式服务器?
+节省了下载安装tomcat，应用也不需要再打war包，然后放到webapp目录下再运行,只需要一个安装了Java的虚拟机，就可以直接在上面部署应用程序了,springboot已经内置了tomcat.jar，运行main方法时会去启动tomcat，并利用tomcat的spi机制加载springmvc

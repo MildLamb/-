@@ -464,3 +464,7 @@ spring事务的原理是AOP，进行了切面增强，那么失效的根本原�
 9. ViewReslover解析后返回具体View。
 10. DispatcherServlet根据View进行渲染视图(即将模型数据填充至视图中)。
 11. DispatcherServlet响应用户。
+
+![image](https://user-images.githubusercontent.com/92672384/153787785-5a5255ff-ff00-47b7-ae3c-61987258383a.png)
+
+

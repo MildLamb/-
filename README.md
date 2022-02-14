@@ -451,3 +451,16 @@ spring事务的原理是AOP，进行了切面增强，那么失效的根本原�
 - spring是一个IOC容器，用来管理Bean，使用依赖注入实现控制反转，可以很方便的整合各种框架，提供AOP机制弥补oOP的代码重复问题、更方便将不同类不同方法中的共同处理抽取成切面、自动注入给方法执行，比如日志、异常等
 - springmvc是spring对web框架的一个解决方案，提供了一个总的前端控制器Servlet，用来接收请求，然后定义了一套路由策略(url到handle的映射）及适配执行handle，将handle结果使用视图解析技术生成视图展现给前端
 - springboot是spring提供的一个快速开发工具包，让程序员能更方便、更快速的开发spring+springmvc应用，简化了配置(约定了默认配置)，整合了一系列的解决方案(starter机制) 、redis、mongodb、es，可以开箱即用
+
+## SpringMVC的处理流程?
+1. 用户发送请求至前端控制器|DispatcherServlet。
+2. DispatcherServlet收到请求调用HandlerMapping处理器映射器。
+3. 处理器映射器找到具体的处理器(可以根据xml配置、注解进行查找)，生成处理器及处理器拦截器(如果有则生成)—并返回给DispatcherServlet。
+4. DispatcherServlet 调用HandlerAdapter 处理器适配器。
+5. HandlerAdapter经过适配调用具体的处理器(Controller，也叫后端控制器)
+6. Controller执行完成返回ModelAndView。
+7. HandlerAdapter将controller执行结果ModelAndView返回给DispatcherServlet。
+8. DispatcherServlet将ModelAndView传给ViewReslover视图解析器。
+9. ViewReslover解析后返回具体View。
+10. DispatcherServlet根据View进行渲染视图(即将模型数据填充至视图中)。
+11. DispatcherServlet响应用户。

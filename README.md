@@ -514,3 +514,34 @@ initFlashMapManager(context)，用来管理FlashMap的，FlashMap主要用在red
 2. hibernate数据库移植性远大于mybatis
 3. mybatis相比hibernate需要关心很多细节
 4. sql直接优化上，mybatis要比hibernate方便很多
+
+## #{}和${}的区别?
+- #{}是预编译处理、是占位符，${}是字符串替换、是拼接符。
+- Mybatis在处理#{}时，会将sql中的#{}替换为?号，调用PreparedStatement来赋值;
+- Mybatis在处理${}时，就是把${}替换成变量的值，调用Statement来赋值;
+- 使用#{}可以有效的防止SQL注入，提高系统安全性。
+- #{}的变量替换是在DBMS中、变量替换后，#{}对应的变量自动加上单引号
+- ${}的变量替换是在DBMS外、变量替换后，${}对应的变量不会加上单引号
+
+## Mybatis插件运行原理以及开发流程
+- Mybatis只支持针对ParameterHandler、ResultSetHandler、StatementHandler、Executor这4种接口的插件，Mybatis使用JDK的动态代理，为需要拦截的接口生成代理对象以实现接口方法拦截功能，每当执行这4种接口对象的方法时，就会进入拦截方法，具体就是InvocationHandler的invoke()方法，拦截那些你指定需要拦截的方法。
+
+- 编写插件:实现Mybatis的 Interceptor接口并复写intercept()方法，然后在给插件编写注解，指定要拦截哪个接口的哪些方法即可，在配置文件中配置编写的插件。
+
+## 索引的原理
+![image](https://user-images.githubusercontent.com/92672384/154183103-2954559c-10fa-4791-98bd-0c549e0b0191.png)
+
+
+## 索引的分类
+- 普通索引：
+最基本的索引，没有任何限制  
+普通索引允许被索引的数据列包含重复的值  
+一个索引只包含一个列，一个表中可以有多个单列索引  
+- 唯一索引：
+与"普通索引"类似，不同的就是：索引列的值必须唯一，但允许有空值。  
+- 主键索引：
+它是一种特殊的唯一索引，不允许有空值。  
+- 联合索引：
+多列值组成一个索引，专门用于组合搜索，其效率大于索引合并  
+- 全文索引：
+全文索引主要使用来查找文本中的关键字，全文索引基本上不可能用到。如果有这样的需求，请用第三方框架  

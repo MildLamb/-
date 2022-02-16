@@ -508,3 +508,9 @@ initFlashMapManager(context)，用来管理FlashMap的，FlashMap主要用在red
 - 缺点：  
 1. SQL语句的编写工作量较大，尤其当字段多、关联表多时，对开发人员编写SQL语句的功底有一定要求。
 2. SQL语句依赖于数据库，导致数据库移植性差，不能随意更换数据库。
+
+## Mybatis和Hibernate区别
+1. hibernate是全自动，而mybatis是半自动
+2. hibernate数据库移植性远大于mybatis
+3. mybatis相比hibernate需要关心很多细节
+4. sql直接优化上，mybatis要比hibernate方便很多

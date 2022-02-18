@@ -662,3 +662,24 @@ InnoDB redo log写盘，InnoDB 事务进入 prepare状态。
 如果前面 prepare 成功，binlog写盘，再继续将事务日志持久化到 binlog，如果持久化成功，
 那么、InnoDB事则进入commit 状态(在 redo log 里面写一个commit 记录)
 ```
+
+## 什么是MVCC?
+- 多版本并发控制:读取数据时通过一种类似快照的方式将数据保存下来，这样读锁就和写锁不冲突了，不同的事务session会看到自己特定版本的数据，版本链
+- MVCC只在READ COMMITTED和REPEATABLE READ 两个隔离级别下工作。其他两个隔离级别够和MVCC不兼容,因为READ UNCOMMITTED总是读取最新的数据行,而不是符合当前事务版本的数据行。而SERIALIZABLE则会对所有读取的行都加锁。
+
+聚簇索引记录中有两个必要的隐藏列:  
+- trx_id:用来存储每次对某条聚簇索引记录进行修改的时候的事务id。
+- roll_pointer:每次对哪条聚簇索引记录有修改的时候，都会把老版本写入undo日志中。这个roll_pointer就是存了一个指针，它指向这条聚簇索引记录的上一个版本的位置，通过它来获得上一个版本的记录信息。(注意插入操作的undo日志没有这个属性，因为它没有老版本)
+
+- 开始事务时创建readview,readView维护当前活动的事务id，即未提交的事务id，排序生成一个数组访问数据，获取数据中的事务id(获取的是事务id最大的记录)，对比readview:
+- 如果在readview的左边(比readview都小)，可以访问(在左边意味着该事务已经提交)
+- 如果在readview的右边(比readview都大）或者就在readview中，不可以访问，获取roll_pointer，取上一版本重新对比(在右边意味着，该事务在readview生成之后出现，在readview中意味着该事务还未提交)
+- 已提交读隔离级别下的事务在每次查询的开始都会生成一个独立的ReadView,而可重复读隔离级别则在第一次读的时候生成一个ReadView，之后的读都复用之前的ReadView。
+- 这就是Mysql的MVCC,通过版本链，实现多版本，可并发读·写，写-读。通过ReadView生成策略的不同实现不同的隔离级别。
+
+## Mysql主从同步原理
+Mysql的主从复制中主要有三个线程: master (binlog dump thread). slave(I/o thread . sQLthread） , Master—条线程和Slave中的两条线程。  
+- 主节点binlog，主从复制的基础是主库记录数据库的所有变更记录到binlog。binlog是数据库服务器启动的那一刻起，保存所有修改数据库结构或内容的一个文件。
+- 主节点log dump线程，当binlog有变动时，log dump线程读取其内容并发送给从节点。
+- 从节点I/o线程接收binlog内容，并将其写入到relay log 文件中。
+- 从节点的SQL线程读取relay log文件内容对数据更新进行重放，最终保证主从数据库的一致性。

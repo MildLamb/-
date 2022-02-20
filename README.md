@@ -744,3 +744,13 @@ Redis基于Reactor模式开发了网络事件处理器，这个处理器叫做�
 
 ## 缓存雪崩、缓存穿透、缓存击穿
 [https://github.com/MildLamb/Learn_Redis/blob/main/Redis%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%E5%92%8C%E9%9B%AA%E5%B4%A9.md](https://github.com/MildLamb/Learn_Redis/blob/main/Redis%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%E5%92%8C%E9%9B%AA%E5%B4%A9.md)
+
+## Redis事务的实现
+[https://github.com/MildLamb/Learn_Redis/blob/main/Redis%E4%BA%8B%E5%8A%A1.md](https://github.com/MildLamb/Learn_Redis/blob/main/Redis%E4%BA%8B%E5%8A%A1.md)
+
+涉及到的一些命令：  
+- WATCH命令是一个乐观锁，可以为Redis事务提供check-and-set (CAS)行为。可以监控一个或多个键,一旦其中有一个键被修改（或删除)，之后的事务就不会执行，监控一直持续到EXEC命令。
+- MULTI命令用于开启一个事务，它总是返回OK。MULTl执行之后，客户端可以继续向服务器发送任意多条命令，这些命令不会立即被执行，而是被放到一个队列中，当EXEC命令被调用时，所有队列中的命令才会被执行。
+- EXEC∶执行所有事务块内的命令。返回事务块内所有命令的返回值，按命令执行的先后顺序排列。当操作被打断时，返回空值nil 。
+- DISCARD：通过调用DISCARD，客户端可以清空事务队列，并放弃执行事务，并且客户端会从事务状态中退出。
+- UNWATCH：UNWATCH命令可以取消watch对所有key的监控。

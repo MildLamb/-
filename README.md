@@ -743,3 +743,4 @@ Redis基于Reactor模式开发了网络事件处理器，这个处理器叫做�
 3）单线程反而避免了多线程的频繁上下文切换带来的性能问题
 
 ## 缓存雪崩、缓存穿透、缓存击穿
+[https://github.com/MildLamb/Learn_Redis/blob/main/Redis%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%E5%92%8C%E9%9B%AA%E5%B4%A9.md](https://github.com/MildLamb/Learn_Redis/blob/main/Redis%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%E5%92%8C%E9%9B%AA%E5%B4%A9.md)

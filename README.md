@@ -830,3 +830,9 @@ Partition Tolerance(分区容错性):
 ## RPC和RMI的理解
 RPC:在本地调用远程的函数，远程过程调用，可以跨语言实现httpClient  
 RMI:远程方法调用，java中用于实现RPC的一种机制，RPC的java版本，是J2EE的网络调用机制，跨JVM调用对象的方法，面向对象的思维方式。直接或间接实现接口java.rmi.Remote成为存在于服务器端的远程对象，供客户端访问并提供一定的服务远程对象必须实现java.rmi.server.UniCastRemoteObject类，这样才能保证客户端访问获得远程对象时，该远程对象将会把自身的一个拷贝以Socket的形式传输给客户端。
+
+## Spring Cloud和Dubbo的区别?
+- 底层协议: springcloud基于http协议，dubbo基于Tcp协议，决定了dubbo的性能相对会比较好注册中心
+- Spring Cloud 使用的eureka , dubbo推荐使用zookeeper
+- 模型定义: dubbo将一个接口定义为一个服务，SpringCloud则是将一个应用定义为一个服务
+- SpringCloud是一个生态，而Dubbo是SpringCloud生态中关于服务调用一种解决方案（服务治理)

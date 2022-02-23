@@ -3,11 +3,18 @@
 - 面向过程更注重事情的每一个步骤及顺序，面向对象更注重事情有哪些参与者(对象)、及各自需要做什么
 
 ## JDK,JRE,JVM的联系和区别?
-- JDK：Java Develpment Kit(Java开发工具包)
-- JRE：Java Runtime Environment(Java运行时环境)
-- JVM：Java Virtual(Java虚拟机)
+- JDK：Java Develpment Kit(Java开发工具包)，是整个JAVA的核心，包括了Java运行环境（Java Runtime Envirnment），一堆Java工具（javac/java/jdb等）和Java基础的类库（即Java API 包括rt.jar）。
+- JRE：Java Runtime Environment(Java运行时环境)，包含JVM标准实现及Java核心类库。JRE里面有两个文件夹bin/,lib/。bin/就是JVM,lib就是JVM所需要库。
+- JVM：Java Virtual(Java虚拟机)，JVM是JRE的一部分,是虚拟出来的一台计算机.通过实体计算机仿真各种计算功能来实现,JVM有自己完善的硬件架构,如处理器,堆栈,寄存器等,还有相应的指令集.JVM是Java跨平台的核心,Java程序通过JVM的跨平台,从而使Java程序跨平台.
 
 ![image](https://user-images.githubusercontent.com/92672384/152710278-d4c118f2-db7b-4119-8571-daa61487e946.png)
+
+1.三者联系：  
+JVM不能单独搞定class的执行，解释class的时候JVM需要调用解释所需要的类库lib。在JDK下面的的jre目录里面有两个文件夹bin和lib,在这里可以认为bin里的就是jvm，lib中则是jvm工作所需要的类库，而jvm和 lib和起来就称为jre。JVM+Lib=JRE。总体来说就是，我们利用JDK（调用JAVA API）开发了属于我们自己的JAVA程序后，通过JDK中的编译程序（javac）将我们的文本java文件编译成JAVA字节码，在JRE上运行这些JAVA字节码，JVM解析这些字节码，映射到CPU指令集或OS的系统调用。  
+
+2.三者区别：  
+a.JDK和JRE区别：在bin文件夹下会发现，JDK有javac.exe而JRE里面没有，javac指令是用来将java文件编译成class文件的，这是开发者需要的，而用户（只需要运行的人）是不需要的。JDK还有jar.exe, javadoc.exe等等用于开发的可执行指令文件。这也证实了一个是开发环境，一个是运行环境。  
+b.JRE和JVM区别：JVM并不代表就可以执行class了，JVM执行.class还需要JRE下的lib类库的支持，尤其是rt.jar  
 
 ## ==和equals的区别?
 - ==对比的是栈中的值，基本数据类型是变量值，引用类型是堆中内存对象的地址

@@ -137,9 +137,10 @@ jdk7：
 - get方法无需加锁,volatile保证
 
 jdk8：  
-- 数据结构: synchronized+CAS+Node+红黑树，Node的val和next都用volatile修饰，保证可见性查找，替换，赋值操作都使用CAS
-- 锁:锁链表的head节点，不影响具他兀系的读与，认性，扩容
-- 读操作无锁:Node的val和next使用volatile修饰，读写线程对该变量互相可见数组用volatile修饰，保证扩容时被读线程感知
+- 数据结构：synchronized+CAS+Node+红黑树，Node的val和next都用volatile修饰，保证可见性;查找，替换，赋值操作都使用CAS
+- 锁：锁链表的head节点，不影响其他元素的读写，锁粒度更细，效率更高，扩容时，阻塞所有读写操作，并发扩容
+- 读操作无锁：Node的val和next使用volatile修饰，读写线程对该变量互相可见
+- 数组使用volatile修饰，保证扩容时被读线程感知。
 
 ## 如何实现一个IOC容器?
 1. 配置文件配置包扫描路径

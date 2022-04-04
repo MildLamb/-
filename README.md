@@ -17,7 +17,9 @@ a.JDK和JRE区别：在bin文件夹下会发现，JDK有javac.exe而JRE里面没
 b.JRE和JVM区别：JVM并不代表就可以执行class了，JVM执行.class还需要JRE下的lib类库的支持，尤其是rt.jar  
 
 ## ==和equals的区别?
+- equals 是方法，而 == 是操作符
 - ==对比的是栈中的值，基本数据类型是变量值，引用类型是堆中内存对象的地址
+- 没有复写 Object 类的 equals 方法，使用 == 和 equals 比较是一样效果的
 
 ## final的作用?
 最终的  

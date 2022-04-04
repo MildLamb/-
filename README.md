@@ -120,8 +120,12 @@ hashCode()的作用是获取哈希码，也称为散列码;它实际上是返回
 - LinkedList:基于链表，可以存储在分散的内存中，适合做数据插入及删除操作，不适合查询:需要逐一遍历遍历LinkedList必须使用iterator不能使用for循环，因为每次for循环体内通过get(i取得某一元素时都需要对list重新进行遍历，性能消耗极大。另外不要试图使用indexOf等返回元素索引，并利用其进行遍历，使用indexlof对list进行了遍历，当结果为空时会遍历整个列表。
 
 ## HashMap和Hashtable的区别
-(1) HashMap方法没有synchronized修饰，线程非安全，HashTable线程安全;  
-(2) HashMap允许key和value为null，而HashTable不允许  
+(1) Hashtable继承自Dictionary类，而HashMap继承自AbstractMap类。但二者都实现了Map接口。
+(2) HashMap方法没有synchronized修饰，线程非安全，HashTable线程安全;  
+(3) HashMap允许key和value为null，而HashTable不允许  
+(4) 内部实现使用的数组初始化和扩容方式不同
+- HashTable在不指定容量的情况下的默认容量为11，而HashMap为16
+- Hashtable扩容时，将容量变为原来的2倍加1，而HashMap扩容时，将容量变为原来的2倍。
 
 jdk8开始链表高度到8、数组长度超过64，链表转变为红黑树，元素以内部类Node节点存在  
 - 计算key的hash值，二次hash然后对数组长度取模，对应到数组下标

@@ -192,7 +192,7 @@ Java语言通过字节码的方式，在一定程度上解决了传统解释型�
 
 ## Java的类加载器
 - JDK自带有三个类加载器: bootstrap ClassLoader、ExtClassLoader、AppClassLoader。
-- BootStrapClassLoader是ExtClassLoader的父类加载器，默认负责加载%JAVA_HOME%lib下的jar包和class文件。
+- BootStrapClassLoader是ExtClassLoader的父类加载器，默认负责加载%JAVA_HOME%/lib下的jar包和class文件。
 - ExtClassLoader是AppClassLoader的父类加载器，负责加载%JAVA_HOME%/lib/ext文件夹下的jar包和class类。
 - AppClassLoader是自定义类加载器的父类，负责加载classpath下的类文件。
 - 继承ClassLoader实现自定义类加载器

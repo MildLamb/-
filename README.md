@@ -2,6 +2,11 @@
 - 对比面向过程，是两种不同的处理问题的角度  
 - 面向过程更注重事情的每一个步骤及顺序，面向对象更注重事情有哪些参与者(对象)、及各自需要做什么
 
+## Java面向对象的基本特征
+- 封装：隐藏类的内部实现细节，对类的属性和方法的调用仅使用对外公开的方法
+- 继承：派生类直接拥有父类的非私有属性和方法，继承是多态的前提
+- 多态：对象对于同一消息的不同表现形式
+
 ## JDK,JRE,JVM的联系和区别?
 - JDK：Java Develpment Kit(Java开发工具包)，是整个JAVA的核心，包括了Java运行环境（Java Runtime Envirnment），一堆Java工具（javac/java/jdb等）和Java基础的类库（即Java API 包括rt.jar）。
 - JRE：Java Runtime Environment(Java运行时环境)，包含JVM标准实现及Java核心类库。JRE里面有两个文件夹bin/,lib/。bin/就是JVM,lib就是JVM所需要库。

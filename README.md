@@ -7,6 +7,13 @@
 - 继承：派生类直接拥有父类的非私有属性和方法，继承是多态的前提
 - 多态：对象对于同一消息的不同表现形式
 
+## i++如何实现的
+i++，在jvm执行时，会被分成四步：
+1.主存中i的数值放到线程工作内存  
+2.加一  
+3.加一的值放回线程工作内存中  
+4.线程工作内存中的值放回主存中  
+
 ## JDK,JRE,JVM的联系和区别?
 - JDK：Java Develpment Kit(Java开发工具包)，是整个JAVA的核心，包括了Java运行环境（Java Runtime Envirnment），一堆Java工具（javac/java/jdb等）和Java基础的类库（即Java API 包括rt.jar）。
 - JRE：Java Runtime Environment(Java运行时环境)，包含JVM标准实现及Java核心类库。JRE里面有两个文件夹bin/,lib/。bin/就是JVM,lib就是JVM所需要库。
